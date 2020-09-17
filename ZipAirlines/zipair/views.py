@@ -28,7 +28,7 @@ class Assess_Planes(APIView):
 
                 if a_id and passengers and isinstance(a_id, int) and isinstance(passengers, int):
                     fuel_tank = 200 * a_id
-                    consumption = 0.80 * math.log(a_id)
+                    consumption = 0.80 * (math.log(a_id) / math.log(10))
                     pass_consumption = 0.002 * passengers
 
                     total_consumption = consumption + pass_consumption
@@ -37,6 +37,7 @@ class Assess_Planes(APIView):
                     plane_stats = {
                         'id': a_id,
                         'passengers': passengers,
+                        'fuel_tank_capacity': fuel_tank,
                         'fuel_consumption_per_minute': total_consumption,
                         'max_flight_time': max_flight_time
                     }
